@@ -187,7 +187,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     # save a checkpoint (every 500 batches)
     if step // 10 % _50_BATCHES == 0:
         saved_file = saver.save(sess, OUT_DIR + '/' + args.output +
-                '_checkpoints/' + timestamp, global_step=step)
+                '/checkpoints/' + timestamp, global_step=step)
 
         print("Saved file: " + saved_file)
 
@@ -198,7 +198,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     istate = ostate
     step += BATCHSIZE * SEQLEN
 
-export_dir = OUT_DIR + '/' + args.output
+export_dir = OUT_DIR + '/' + args.output + '/model'
 
 print(args.corpus)
 builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
