@@ -186,7 +186,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     if step // 10 % _50_BATCHES == 0:
         saved_file = saver.save(sess, 'checkpoints/rnn_train_' + timestamp, global_step=step)
 
-        export_dir = 'out'
+        export_dir = 'out2'
         builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
         builder.add_meta_graph_and_variables(
             sess, [tf.saved_model.tag_constants.SERVING])
