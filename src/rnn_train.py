@@ -125,8 +125,6 @@ OUT_DIR = 'out'
 if not os.path.exists(OUT_DIR):
     os.mkdir(OUT_DIR)
     os.mkdir(OUT_DIR + '/' + args.output)
-    os.mkdir(OUT_DIR + '/' + args.output + '/model')
-    os.mkdir(OUT_DIR + '/' + args.output + '/checkpoints')
 saver = tf.train.Saver(max_to_keep=1000)
 
 # for display: init the progress bar
