@@ -124,8 +124,9 @@ OUT_DIR = 'out'
 # Only the last checkpoint is kept.
 if not os.path.exists(OUT_DIR):
     os.mkdir(OUT_DIR)
-    os.mkdir(OUT_DIR + '/model')
-    os.mkdir(OUT_DIR + '/checkpoints')
+    os.mkdir(OUT_DIR + '/' + args.output_dir)
+    os.mkdir(OUT_DIR + '/' + args.output_dir + '/model')
+    os.mkdir(OUT_DIR + '/' + args.output_dir + '/checkpointss')
 saver = tf.train.Saver(max_to_keep=1000)
 
 # for display: init the progress bar
