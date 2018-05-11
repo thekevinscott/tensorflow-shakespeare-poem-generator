@@ -209,7 +209,9 @@ print(datetime.now() - startTime)
 
 
 def main_loop():
+    print('main loop!')
     while 1:
+        print('1')
         # do your stuff...
         time.sleep(1)
 
