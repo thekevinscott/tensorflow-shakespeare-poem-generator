@@ -127,7 +127,7 @@ if not os.path.exists("checkpoints"):
 saver = tf.train.Saver(max_to_keep=1000)
 
 # for display: init the progress bar
-DISPLAY_FREQ = 50
+DISPLAY_FREQ = 500
 _50_BATCHES = DISPLAY_FREQ * BATCHSIZE * SEQLEN
 progress = txt.Progress(DISPLAY_FREQ, size=111+2, msg="Training on next "+str(DISPLAY_FREQ)+" batches")
 
