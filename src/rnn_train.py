@@ -35,7 +35,7 @@ parser.add_argument('--output', help='The name of the output model')
 
 args = parser.parse_args()
 
-print(args)
+raise ValueError('foo')
 tf.set_random_seed(0)
 
 device_lib.list_local_devices()
@@ -50,8 +50,7 @@ learning_rate = 0.001  # fixed learning rate
 dropout_pkeep = 0.8    # some dropout
 
 # load data, either shakespeare, or the Python source of Tensorflow itself
-shakedir = "shakespeare/*.txt"
-#shakedir = "../tensorflow/**/*.py"
+shakedir = args.corpus + "/*.txt"
 codetext, valitext, bookranges = txt.read_data_files(shakedir, validation=True)
 
 # display some stats on the data
@@ -120,10 +119,11 @@ timestamp = str(math.trunc(time.time()))
 summary_writer = tf.summary.FileWriter("log/" + timestamp + "-training")
 validation_writer = tf.summary.FileWriter("log/" + timestamp + "-validation")
 
+OUT_DIR = 'out'
 # Init for saving models. They will be saved into a directory named 'checkpoints'.
 # Only the last checkpoint is kept.
-if not os.path.exists("checkpoints"):
-    os.mkdir("checkpoints")
+if not os.path.exists(OUT_DIR):
+    os.mkdir(OUT_DIR)
 saver = tf.train.Saver(max_to_keep=1000)
 
 # for display: init the progress bar
@@ -184,7 +184,8 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
 
     # save a checkpoint (every 500 batches)
     if step // 10 % _50_BATCHES == 0:
-        saved_file = saver.save(sess, 'checkpoints/rnn_train_' + timestamp, global_step=step)
+        saved_file = saver.save(sess, OUT_DIR + '/' + args.output +
+                '_checkpoints/' + timestamp, global_step=step)
 
         print("Saved file: " + saved_file)
 
@@ -195,7 +196,9 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     istate = ostate
     step += BATCHSIZE * SEQLEN
 
-export_dir = 'checkpoints/rnn_train_'
+export_dir = OUT_DIR + '/' + args.output
+
+print(args.corpus)
 builder = tf.saved_model.builder.SavedModelBuilder(export_dir)
 builder.add_meta_graph_and_variables(
         sess, [tf.saved_model.tag_constants.SERVING])
