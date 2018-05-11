@@ -206,3 +206,12 @@ builder.add_meta_graph_and_variables(
 builder.save()
 
 print(datetime.now() - startTime)
+
+
+def main_loop():
+    while 1:
+        # do your stuff...
+        time.sleep(1)
+
+
+main_loop()
