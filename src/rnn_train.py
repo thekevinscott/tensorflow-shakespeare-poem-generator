@@ -33,9 +33,6 @@ parser.add_argument('--output', help='The name of the output model')
 
 args = parser.parse_args()
 
-args.corpus = "shakespeare"
-args.output = "shakespeare"
-
 tf.set_random_seed(0)
 
 device_lib.list_local_devices()
