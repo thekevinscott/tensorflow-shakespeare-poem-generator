@@ -186,6 +186,7 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     if step // 10 % _50_BATCHES == 0:
         saved_file = saver.save(sess, 'checkpoints/rnn_train_' + timestamp, global_step=step)
         print("Saved file: " + saved_file)
+        raise ValueError("Stop it")
 
     # display progress bar
     progress.step(reset=step % _50_BATCHES == 0)
@@ -194,5 +195,4 @@ for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN,
     istate = ostate
     step += BATCHSIZE * SEQLEN
 
-saver.save(sess, '/home/thekevinscott/code/nlp-generator/out', global_step=1000)
 print(datetime.now() - startTime)
