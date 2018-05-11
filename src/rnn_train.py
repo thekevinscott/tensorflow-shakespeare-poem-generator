@@ -34,7 +34,7 @@ parser.add_argument('--output', help='The name of the output model')
 args = parser.parse_args()
 
 args.corpus = "shakespeare"
-args.output = "outtttty"
+args.output = "shakespeare"
 
 tf.set_random_seed(0)
 
