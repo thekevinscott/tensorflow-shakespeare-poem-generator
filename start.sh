@@ -1,3 +1,8 @@
 #!/bin/bash
 
-NV_GPU=1 nvidia-docker run -w /code -v $(pwd)/src:/code -it tensorflow/tensorflow:latest-gpu-py3 python3 ./rnn_train.py
+docker stop text-generation
+docker rm text-generation
+# docker build -t text-generation-image .
+NV_GPU=1 nvidia-docker run -it --name text-generation text-generation-image
+docker logs -f text-generation
+
